@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// lesson 134, manage user input with two way binding (without using refs)
 export default function Player() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
