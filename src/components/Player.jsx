@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-// lesson 134, manage user input with two way binding (without using refs)
+// using refs would be an alternative approach here
 export default function Player() {
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleChange(event) {
-    setSubmitted(false);
-    setName(event.target.value);
-  }
+  const [enteredName, setEnteredName] = useState("");
+  let name = useRef();
 
   function handleClick() {
-    setSubmitted(true);
+    // setSubmitted(true);
+    setEnteredName(name.current.value);
+    name.current.value = "";
   }
 
   return (
     <section id="player">
-      <h2>Welcome {submitted && name !== "" ? name : "unknown entity"}</h2>
+      <h2>
+        Welcome{" "}
+        {enteredName && enteredName !== "" ? enteredName : "unknown entity"}
+      </h2>
       <p>
-        <input type="text" value={name} onChange={handleChange} />
+        <input type="text" ref={name} />
         <button onClick={handleClick}>Set Name</button>
       </p>
     </section>
